@@ -1,658 +1,233 @@
 # 📌 Campus ERP - Enterprise Resource Planning System
 
-A comprehensive, production-ready Enterprise Resource Planning (ERP) system designed for educational institutions. The system manages students, faculty, attendance, marks, fees, library, notices, and study materials in one unified platform.
+A comprehensive, production-ready Enterprise Resource Planning (ERP) system designed for educational institutions. The system digitalizes and automates student registries, faculty assignments, class attendance, grade cards, library books, notices, study materials, and billing/fee collections into a unified, secure platform.
 
 ---
 
 ## 📖 1. Project Overview
 
 ### **What is Campus ERP?**
-Campus ERP is a complete institutional management solution that digitalizes and streamlines all academic operations. It replaces manual paperwork with an automated, role-based system accessible to administrators, faculty, and students.
+Campus ERP is a multi-role web application that streamlines academic operations by replacing manual paperwork with automated, role-based workflows accessible to Administrators, Faculty members, and Students.
 
 ### **Problems It Solves**
-- 🎯 **Manual Attendance Tracking** → Automated attendance marking and reporting
-- 📚 **Paper-Based Mark Sheets** → Digital mark management with instant updates
-- 💰 **Manual Fee Calculation** → Automated fee tracking and payment status
-- 📖 **Library Chaos** → Centralized book inventory and issue tracking
-- 📢 **Communication Delays** → Instant notice distribution to targeted roles
-- 🔐 **Scattered Data** → Unified database for all institutional data
-- 🕐 **Time-Consuming Processes** → Bulk uploads and automated operations
-
-### **Target Users**
-- **Administrators** - Full system control, user management, data uploads
-- **Faculty** - Mark attendance, upload marks, manage classes
-- **Students** - View attendance, check marks, track fees, access materials
-
-### **Core Idea**
-A centralized digital hub where every stakeholder in an educational institution can access, manage, and track academic data in real-time through an intuitive, role-based interface.
+* 🎯 **Manual Attendance Tracking** -> High-precision attendance marking with real-time risk alerts for low attendance.
+* 📚 **Paper-Based Grade Sheets** -> Multi-type marks upload (Internal, Midterm, Semester) with instant student performance analytics.
+* 💰 **Manual Fee Management** -> Term-based fee tracking with payment statuses (`paid`, `partial`, `pending`) and bulk template uploads.
+* 📖 **Library Logbooks** -> Book lending registry tracking copies, availability, issue dates, and return statuses.
+* 📢 **Communication Gaps** -> Targeted notices broadcasted directly to specific user roles.
+* 🔐 **Data Isolation** -> Enforces robust data security policies so students and faculty can only access their authorized records.
 
 ---
 
 ## 🚀 2. Features (Comprehensive List)
 
-### **Authentication & Security**
-✅ Role-based login (Admin, Faculty, Student)  
-✅ JWT token-based authentication (Stateless ID embedding)
-✅ Password hashing with bcrypt  
-✅ Double-layer data isolation (Middleware + Service enforcement)
-✅ Email verification system (Optional/Disabled in Demo)
-✅ Forgot password & reset functionality  
-✅ Session management with short-expiry tokens (30m)
-✅ Automatic state cleanup on logout
-✅ Change password feature  
-✅ Rate limiting & Security headers (Helmet)
+### 🔑 **Authentication & Security**
+* **Role-Based Access Control (RBAC)**: Strict permission boundaries for `admin`, `faculty`, and `student`.
+* **State Verification**: Stateless JWT tokens (embedded with studentId/facultyId) to eliminate redundant database lookups.
+* **Double-Layer Data Privacy**: 
+  * *Router Layer*: `filterSelf` middleware intercepts requests and injects the authenticated user’s ID directly into the query parameters.
+  * *Service Layer*: Secondary verification checks query parameters against the validated token payload for zero-bypass isolation.
+* **Password Security**: Safe credentials storage hashed with `bcrypt` (10 salt rounds).
+* **Automatic Expiry Logout**: Axios interceptor automatically detects expired sessions (401 errors) and clears local storage safely.
 
-### **Admin Features**
-✅ **User Management** - Create, edit, delete admin, faculty, and student accounts  
-✅ **Student Management** - Add/edit students, bulk CSV upload  
-✅ **Faculty Management** - Manage faculty details and assign subjects  
-✅ **Subject Management** - Create subjects, assign faculty and credits  
-✅ **Attendance Control** - Review all attendance records, mark manually  
-✅ **Marks Management** - Create and manage student marks  
-✅ **Fee Management** - Track student fees, payment status, generate reports  
-✅ **Library Control** - Manage books, issue tracking  
-✅ **Materials Upload** - Upload study materials linked to subjects  
-✅ **Notices** - Create and broadcast notices to different roles  
-✅ **System Health** - Monitor API, database connections  
-✅ **Bulk Operations** - CSV upload for students and attendance  
+### 👑 **Admin Features**
+* **User Management**: Create, update, or deactivate system login credentials for all roles.
+* **Academic Control**: CRUD operations on Students, Faculty, and Course Subjects.
+* **Faculty Assignment**: Map specific subjects, departments, and course structures to faculty records.
+* **Financial Ledger**: Track billing, record partial or full payments, and download status sheets.
+* **Library Inventory**: Registry of books, copies available, and borrowing records.
+* **Broadcast Hub**: Send announcements targeting all users or filtered by specific roles.
 
-### **Faculty Features**
-✅ **Mark Attendance** - Mark attendance for assigned classes  
-✅ **Upload Marks** - Enter student marks with exam type (internal, mid, semester)  
-✅ **View Classes** - See assigned classes and students  
-✅ **View Notices** - Receive administrative notices  
-✅ **Access Materials** - View and share study materials  
-✅ **Attendance Reports** - View attendance patterns  
-✅ **Student Performance** - Monitor student mark distributions  
+### 👨‍🏫 **Faculty Features**
+* **My Classes Dashboard**: View current teaching assignments and allocated subjects.
+* **Digital Attendance Ledger**: Mark student attendance by class and date. Includes unique compound indexes to prevent duplicates.
+* **Performance Entry**: Upload grades for internal tests, mid-semesters, or final examinations.
+* **Resources Upload**: Post lectures, slide decks, and reading resources associated with assigned subjects.
 
-### **Student Features**
-✅ **View Attendance** - High-precision tracking with color-coded risk levels  
-✅ **Check Marks** - View marks with percentage-based pass/fail logic  
-✅ **Performance Analytics** - Dedicated dashboard with trends and subject-wise breakdown  
-✅ **At-Risk Monitoring** - Real-time alerts for attendance shortages  
-✅ **Track Fees** - Monitor fee status and payment history  
-✅ **Access Materials** - Download study materials uploaded by faculty  
-✅ **View Notices** - Receive important announcements  
-✅ **Library Access** - View issued books and due dates  
-✅ **Dashboard** - 30-second cached overview of academic status  
-
-### **System-Wide Features**
-✅ Real-time pagination  
-✅ Data validation with Joi schemas  
-✅ API error handling  
-✅ Request logging with Morgan  
-✅ CORS security  
-✅ Helmet security headers  
-✅ Responsive UI across all devices  
+### 🎓 **Student Features**
+* **Overview Dashboard**: Capped cached view of attendance percentages, issued books, pending fees, and announcements.
+* **Performance Analytics**: Subject-wise grade charts powered by `recharts` to identify performance trends.
+* **Attendance Risk Monitoring**: Color-coded risk indicators highlighting courses with attendance below the required 75% threshold.
+* **Materials Locker**: Browse and download study materials posted by subject faculty.
+* **Financial Ledger**: View current fee bills, transaction records, and payment statuses.
 
 ---
 
-## 🏗️ 3. Project Architecture
+## 🏗️ 3. Project Architecture & Lifecycle
 
-### **Overall Flow**
+### **System Data Flow**
 ```
-User (Browser)
-    ↓
-Frontend (React + Vite)
-    ↓
-API Calls (Axios with JWT tokens)
-    ↓
-Backend (Node.js + Express)
-    ↓
-Middleware (Auth, Validation, Error Handling)
-    ↓
-Services (Business Logic)
-    ↓
-Controllers (Request/Response)
-    ↓
-MongoDB (Data Persistence)
-```
-
-### **Request-Response Lifecycle**
-
-**1. Request Initiated**
-- User interacts with frontend (login, button click, etc.)
-- Frontend sends HTTP request with JWT token in headers
-
-**2. Backend Processing**
-- Request arrives at Express server
-- Middleware checks: Auth → Validation → Routing
-- Appropriate controller receives request
-- Controller calls service layer
-- Service executes business logic, queries database
-
-**3. Response Returned**
-- Service returns data to controller
-- Controller formats response with success/error status
-- Response sent to frontend as JSON
-- Frontend updates UI and shows notifications
-
-### **Authentication Flow**
-
-```
-User Credentials (Email + Password)
-    ↓
-Backend Validation (Email exists? Password matches?)
-    ↓
-Generate JWT Token (Contains: userID, role, email, studentId/facultyId)
-    ↓
-Return Token + User Object to Frontend
-    ↓
-Frontend Stores Token in localStorage
-    ↓
-Axios Interceptor Adds Token to All Requests
-    ↓
-Backend Security Middleware (filterSelf logic uses token IDs directly)
-    ↓
-Service Layer Enforcement (Secondary filter override for zero-bypass)
-    ↓
-If Valid: Allow Request | If Invalid: Return 401
+User (Browser Interface)
+       ↓
+Frontend (React 18 + Vite 6 + Tailwind CSS)
+       ↓  (Axios HTTP Client with JWT Interceptors)
+Backend Gateway (Node.js + Express 4)
+       ↓  (Security Headers / Morgan Logger / Body Parser)
+Middleware Pipeline (Auth Guard → Joi Schema Validation → filterSelf Privacy)
+       ↓  (Route Mapping)
+Controllers Layer (Extracts request inputs, executes generic or custom CRUDs)
+       ↓
+Services Layer (Core business logic, aggregation pipelines, CSV bulk parsing)
+       ↓
+Models / ODM (Mongoose schemas, compound indexes, constraints)
+       ↓
+Database (MongoDB Atlas)
 ```
 
 ---
 
-## 📂 4. Folder Structure
+## 📂 4. Detailed Codebase Map
 
-The complete folder structure is organized as follows:
+### 🖥️ **Frontend (`frontend/`)**
+* `src/App.jsx`: Global router configuring protected routes and custom role-based view permissions.
+* `src/context/AuthContext.jsx`: Manages global login states, user metadata, and persistent tokens.
+* `src/services/api.js`: Centrally configures Axios with request token headers and global 401 interceptors.
+* `src/pages/`:
+  * `LoginPage.jsx`: Multi-role login panel with custom password visibility toggles.
+  * `RoleHome.jsx`: Adaptive dashboard displaying custom widgets based on the logged-in role.
+  * `PerformancePage.jsx`: Renders analytics dashboards showing subject averages and trends using Recharts.
+  * `StudentsPage.jsx` / `FacultyPage.jsx` / `SubjectsPage.jsx`: Dynamic tables for administrators to perform CRUD operations, filter data, and process bulk CSV files.
+  * `AttendancePage.jsx` / `MarksPage.jsx` / `LibraryPage.jsx` / `FeesPage.jsx`: Core application features adjusting UI fields depending on whether the viewer is an Admin, Faculty, or Student.
+  * `faculty/MyClasses.jsx` / `faculty/FacultyAttendance.jsx` / `faculty/FacultyMarks.jsx`: Dedicated interfaces for faculty class assignments, attendance logging, and grade uploads.
 
-```
-vignan/
-├── backend/                          # Node.js Express API
-│   ├── config/                       # Configuration files
-│   ├── models/                       # MongoDB Schemas
-│   ├── controllers/                  # Request handlers
-│   ├── services/                     # Business logic
-│   ├── routes/                       # API endpoints
-│   ├── middleware/                   # Request processors
-│   ├── validators/                   # Request schemas
-│   ├── utils/                        # Utility functions
-│   ├── app.js                        # Express app setup
-│   ├── server.js                     # Server entry point
-│   ├── package.json                  # Dependencies
-│   └── .env                          # Environment variables
-│
-├── frontend/                          # React Frontend
-│   ├── src/
-│   │   ├── pages/                   # Page components
-│   │   ├── components/              # Reusable components
-│   │   ├── context/                 # State management
-│   │   ├── routes/                  # Route protection
-│   │   ├── services/                # API calls
-│   │   ├── utils/                   # Helper functions
-│   │   ├── layouts/                 # Layout components
-│   │   ├── App.jsx                  # Main app component
-│   │   ├── main.jsx                 # React entry point
-│   │   └── index.css                # Global styles
-│   ├── vite.config.js               # Vite configuration
-│   ├── tailwind.config.js           # Tailwind CSS setup
-│   ├── package.json                 # Dependencies
-│   └── .env.example                 # Environment template
-│
-├── test-data/                        # Sample CSV files
-├── scratch/                          # Temporary files
-└── README.md                         # This file
-```
-
----
-
-## 🧠 5. Core Logic
-
-### **Authentication & Authorization**
-
-**Login Process:**
-1. User enters email and password on LoginPage
-2. Frontend sends POST request to `/api/v1/auth/login`
-3. Backend queries User collection by email
-4. Verifies password with bcrypt comparison
-5. Generates JWT token (expires in 1 day)
-6. Returns token + user object to frontend
-7. Frontend stores token in localStorage (`campus_erp_token`)
-8. Axios interceptor automatically adds token to all requests
-
-**Role-Based Access Control:**
-- Admin: Full system access
-- Faculty: Mark attendance, upload marks, manage classes
-- Student: View own data (attendance, marks, fees)
-
-### **User Data Flow**
-
-**CRUD Operations** follow this pattern:
-```
-User Action → Frontend Validation → API Request → Backend Service → MongoDB → Response → UI Update
-```
-
-### **Bulk Upload Logic**
-
-**CSV Upload Process:**
-1. Admin uploads CSV file via multer middleware
-2. Backend reads CSV with `csv-parser`
-3. Validates each row against schema
-4. Creates documents in bulk
-5. Returns summary (success count, failed count, errors)
-6. Frontend shows success/failure details
+### ⚙️ **Backend (`backend/`)**
+* `server.js`: Connects to MongoDB, synchronizes all schema indexes on startup, and launches the Express server.
+* `app.js`: Configures the middleware stack (Helmet, CORS, body parsers, Morgan, API router, 404 handler, and global error middleware).
+* `config/`:
+  * `db.js`: Establishes connections using the environment `MONGO_URI`.
+  * `index.js`: Standardizes configuration loading and maps environment variables.
+  * `init.js`: Automatically triggers `syncIndexes()` for all database schemas on startup.
+  * `seed.js`: Database script to populate mock entities for development.
+* `models/`:
+  * `User.js`: User accounts with credential hashing and role definitions.
+  * `Student.js`: Links students to users, details departments, semesters, and admission numbers.
+  * `Faculty.js`: Stores academic department details, emails, and assigned subjects.
+  * `Subject.js`: Catalog of courses including credits and subject codes.
+  * `Attendance.js`: Logs dates, statuses (`present`, `absent`, etc.), and student/subject/faculty relationships. Confirms unique records via compound index `{ student: 1, subject: 1, date: 1 }`.
+  * `Mark.js`: Stores student scores mapped to exam types (`internal`, `mid`, `semester`).
+  * `Fee.js`: Financial ledger containing details about term fees, payments, types (`tuition`, `hostel`, `exam`), and due dates.
+  * `Book.js` / `LibraryIssue.js`: Library catalogs and loan transaction records.
+  * `Material.js` / `Notice.js`: Documents study resource locations and targeted notices.
+* `middleware/`:
+  * `auth.js`: Implements the `protect` middleware to verify Bearer JWTs and the `restrictTo` controller guard.
+  * `filterSelf.js`: Injects security scopes into query criteria for student and faculty calls.
+  * `validate.js`: Validates request bodies against Joi definitions before they hit the controller.
+  * `errorHandler.js`: Returns clean, sanitized JSON errors.
+* `services/`:
+  * `attendance.service.js`: Handles complex attendance reporting, student streaks, and low-attendance risk alerts.
+  * `fee.service.js`: Implements transaction records, payment status evaluations, and bulk fee ledger updates.
+  * `library.service.js`: Tracks inventories, checks out books (safely decrementing availability), and manages check-ins.
+  * `auth.service.js` / `student.service.js` / `faculty.service.js`: Core services for user onboarding, profile updates, and authentication pipelines.
+* `utils/`:
+  * `queryHelper.js`: Standardizes request sanitation, clamps pagination limits (default 10, max 100, custom 10000 limit for bulk calls), and escapes query searches.
 
 ---
 
-## 🖥️ 6. Frontend Details
+## 🗄️ 5. Database Schema Design (11 Collections)
 
-### **Technology Stack**
-- **Framework**: React 18.3.1 with Hooks
-- **Build Tool**: Vite 6.0.3
-- **Routing**: React Router DOM v6
-- **HTTP Client**: Axios with interceptors
-- **Styling**: Tailwind CSS v3.4.17
-- **UI Components**: Lucide React (icons), Recharts (charts), React Hot Toast (notifications)
-
-### **Key Pages**
-
-| Page | Purpose | Who Sees It |
-|------|---------|-----------|
-| **LoginPage** | Email/password authentication | Everyone |
-| **RoleHome** | Personalized dashboard with quick stats | All authenticated users |
-| **StudentsPage** | CRUD for students, bulk upload | Admin only |
-| **FacultyPage** | CRUD for faculty members | Admin only |
-| **AttendancePage** | View/mark attendance | All roles |
-| **MarksPage** | View/upload marks | Faculty & Admin |
-| **FeesPage** | Track fee status | All roles |
-| **MaterialsPage** | Upload/download study materials | All roles |
-| **NoticesPage** | View system announcements | All roles |
-| **LibraryPage** | Manage books and issues | All roles |
-
-### **State Management**
-
-**AuthContext** manages:
-- JWT token
-- User object (id, name, email, role)
-- Authentication status
-- Login/Logout functions
+| Collection | Primary Keys / Indexes | Relations | Purpose |
+|---|---|---|---|
+| **users** | `email` (Unique) | - | Authenticates logins |
+| **students** | `admissionNo` (Unique) | `user` -> users | Core student records |
+| **faculties** | `email` (Unique) | `user` -> users | Core faculty records |
+| **subjects** | `code` (Unique) | `faculty` -> faculties | Syllabus courses |
+| **attendances** | `{ student, subject, date }` (Unique Compound) | `student`, `subject`, `faculty` | Daily attendance ledger |
+| **marks** | `{ student, subject, examType }` (Unique Compound) | `student`, `subject` | Academic grades ledger |
+| **fees** | `{ student, term, feeType }` (Unique Compound) | `student` | Tuition and ledger bills |
+| **books** | `isbn` (Unique) | - | Library catalog |
+| **libraryissues**| `_id` | `student`, `book` | Book lending records |
+| **materials** | `_id` | `subject` | Lecture resources |
+| **notices** | `_id` | - | Broadcasted announcements |
 
 ---
 
-## ⚙️ 7. Backend Details
+## 🔑 6. Core Logic Implementation
 
-### **Technology Stack**
-- **Runtime**: Node.js with Express 4.21.2
-- **Database**: MongoDB via Mongoose 9.6.0
-- **Authentication**: JWT (jsonwebtoken 9.0.2)
-- **Password Hashing**: bcrypt 5.1.1
-- **Validation**: Joi 17.13.3
-- **Security**: Helmet 8.0.0, CORS 2.8.5
-- **Logging**: Morgan 1.10.0
-- **File Upload**: Multer 2.1.1
-- **Email**: Nodemailer 8.0.7
-
-### **Architecture Pattern: MVC + Services**
-
-```
-Route → Middleware → Controller → Service → Model → Database
-```
-
-### **Middleware Stack**
-
-1. **Security**: Helmet (headers), CORS
-2. **Parsing**: JSON body parser
-3. **Logging**: Morgan HTTP logger
-4. **Authentication**: JWT verification
-5. **Validation**: Joi schema validation
-6. **Authorization**: Role-based access control
-7. **Error Handling**: Custom error handler
-
-### **API Response Format**
-
-```javascript
-{
-  success: true/false,
-  message: "...",
-  data: {...}
-}
-```
+### **Bulk CSV Parsing & Ingestion**
+Admin panels support importing data using CSV uploads. The pipeline is processed as follows:
+1. **File Ingestion**: Multer processes incoming multi-part files and stores them temporarily.
+2. **Parsing**: `csv-parser` reads rows sequentially.
+3. **Data Normalization**: Cleans, trims, and formats attributes (e.g. converting text identifiers to lowercase enums).
+4. **Relational Lookup**: Maps plain CSV codes (like `admissionNo` or `subjectcode`) to corresponding database ObjectId values.
+5. **Atomic Updates**: Uses MongoDB upserts (`findOneAndUpdate`) where possible to synchronize inputs and prevent duplicates.
+6. **Detailed Reporting**: Returns a detailed summary of successful inserts, skipped duplicates, and structural validation errors (referencing the exact spreadsheet row number).
 
 ---
 
-## 🗄️ 8. Database Design
-
-### **Database: MongoDB**
-
-11 Collections with proper indexing and relationships:
-
-1. **Users** - Authentication and role management
-2. **Students** - Student details and admission info
-3. **Faculty** - Faculty information and assignments
-4. **Subjects** - Course/subject information
-5. **Attendance** - Class attendance records
-6. **Marks** - Student exam marks
-7. **Fees** - Fee tracking and payment status
-8. **Materials** - Study materials/resources
-9. **Notices** - System announcements
-10. **Books** - Library book inventory
-11. **LibraryIssue** - Book issue/return tracking
-
-### **Key Relationships**
-
-- User (1) → (Many) Student/Faculty
-- Faculty (1) → (Many) Subject/Attendance/Mark
-- Subject (1) → (Many) Attendance/Mark/Material
-- Student (1) → (Many) Attendance/Mark/Fee/LibraryIssue
-- Book (1) → (Many) LibraryIssue
-
----
-
-## 🔐 9. Authentication & Security
-
-### **Security Measures**
-
-✅ **JWT Tokens**
-- 30-minute expiration (Production standard)
-- Stateless Identity: Includes studentId/facultyId to eliminate DB lookups
-- Stored in localStorage with global state cleaning on logout
-- Bearer scheme validation
-
-✅ **Double-Layer Privacy Enforcement**
-- **Middleware**: `filterSelf` forces student/faculty filters at the route level.
-- **Service Layer**: Redundant internal checks ensure data isolation even if middleware is bypassed.
-- **Stateless Verification**: Uses IDs from the validated token payload for tamper-proof queries.
-
-✅ **Password Security**
-- Bcrypt hashing (10 salt rounds)
-- Secure password reset
-- Password change on first login
-
-✅ **Role-Based Access Control**
-- Frontend route guards
-- Backend permission validation
-
-✅ **HTTP Security**
-- Helmet headers
-- CORS protection
-- Input validation with Joi
-
-✅ **Error Handling**
-- Sanitized error messages
-- No sensitive data leaks
-
----
-
-## 🔄 10. API Endpoints
-
-### **Quick Reference**
-
-```
-Authentication:
-POST   /api/v1/auth/login              - User login
-POST   /api/v1/auth/change-password    - Change password
-POST   /api/v1/auth/forgot-password    - Request password reset
-POST   /api/v1/auth/reset-password/:token - Reset password
-
-Students:
-GET    /api/v1/students                - List students
-POST   /api/v1/students                - Create student
-PUT    /api/v1/students/:id            - Update student
-DELETE /api/v1/students/:id            - Delete student
-POST   /api/v1/students/bulk-upload    - Bulk upload from CSV
-
-Attendance:
-GET    /api/v1/attendance              - List attendance
-POST   /api/v1/attendance              - Mark attendance
-PUT    /api/v1/attendance/:id          - Update attendance
-
-Marks:
-GET    /api/v1/marks                   - List marks
-POST   /api/v1/marks                   - Upload marks
-PUT    /api/v1/marks/:id               - Update marks
-
-Fees:
-GET    /api/v1/fees                    - List fees
-POST   /api/v1/fees                    - Create fee record
-PUT    /api/v1/fees/:id                - Update fee status
-
-And many more for Faculty, Subjects, Materials, Notices, Library...
-```
-
-All protected endpoints require: `Authorization: Bearer <JWT_TOKEN>`
-
----
-
-## 📊 11. Data Flow Explanation
-
-### **Typical Flow: Student Login → View Dashboard → Check Attendance**
-
-```
-1. Student enters credentials on LoginPage
-   ↓
-2. Frontend: POST /api/v1/auth/login { email, password }
-   ↓
-3. Backend validates password with bcrypt
-   ↓
-4. JWT token generated and returned
-   ↓
-5. Frontend stores token in localStorage
-   ↓
-6. Student redirected to /app/dashboard
-   ↓
-7. Dashboard loads student-specific widgets
-   ↓
-8. Student clicks "View Attendance"
-   ↓
-9. Frontend: GET /api/v1/attendance
-   (Axios interceptor adds: Authorization: Bearer <token>)
-   ↓
-10. Backend middleware verifies token
-    ↓
-11. attendanceService filters by student ID
-    ↓
-12. Records returned with pagination
-    ↓
-13. UI displays attendance table with percentage
-```
-
----
-
-## 🧪 12. Testing & Validation
-
-### **Manual Testing Checklist**
-
-✅ **Authentication**
-- Login with valid/invalid credentials
-- Auto-logout on expired token
-- Protected routes require login
-
-✅ **Role-Based Access**
-- Admin sees all pages
-- Faculty sees faculty pages
-- Student sees student pages
-
-✅ **CRUD Operations**
-- Create records
-- Read/List with pagination
-- Update existing records
-- Delete with confirmation
-
-✅ **Bulk Upload**
-- Upload valid CSV files
-- Handle validation errors
-- Display success summary
-
-✅ **Error Handling**
-- Network errors show toast
-- Invalid data shows validation errors
-- Unauthorized access redirects to login
-
----
-
-## 📦 13. Installation & Setup
+## ⚙️ 7. Installation & Setup
 
 ### **Prerequisites**
-- Node.js v14+
-- MongoDB (local or MongoDB Atlas)
-- npm or yarn
+* Node.js v14 or higher
+* npm or yarn
+* A running MongoDB instance (local server or Atlas cluster URI)
 
-### **Backend Setup**
-
+### **1. Configure the Backend**
 ```bash
+# Navigate to the backend directory
 cd backend
+
+# Install dependencies
 npm install
 
-# Create .env file from .env.example
+# Create your .env file
 cp .env.example .env
-
-# Configure environment variables:
-# MONGO_URI, JWT_SECRET, etc.
-
-# Start development server
-npm run dev
-
-# Expected: Backend runs on http://localhost:5000
 ```
-
-### **Frontend Setup**
-
-```bash
-cd frontend
-npm install
-
-# Create .env.local
-echo "VITE_API_BASE_URL=http://localhost:5000/api/v1" > .env.local
-
-# Start development server
-npm run dev
-
-# Expected: Frontend runs on http://localhost:5173
-```
-
-### **Database Setup**
-
-Option 1: Local MongoDB
-```bash
-mongod  # Start MongoDB service
-```
-
-Option 2: MongoDB Atlas (Cloud)
-- Create cluster at https://www.mongodb.com/cloud/atlas
-- Get connection URI
-- Add to MONGO_URI in backend/.env
-
-### **Create Admin User**
-
-```bash
-cd backend
-npm run create-admin
-# Follow prompts to create admin account
-```
-
-### **Environment Variables**
-
-**Backend (.env)**
+Open the newly created `.env` file and configure your parameters:
 ```env
-NODE_ENV=development
 PORT=5000
+NODE_ENV=development
 API_PREFIX=/api/v1
 CORS_ORIGIN=http://localhost:5173
-JWT_SECRET=your-secret-key
-JWT_EXPIRES_IN=1d
-MONGO_URI=mongodb+srv://user:pass@cluster.mongodb.net/erp_db
+JWT_SECRET=your-secure-jwt-key
+JWT_EXPIRES_IN=24h
+MONGO_URI=mongodb+srv://<user>:<password>@cluster.mongodb.net/campus_erp
 ```
-
-**Frontend (.env.local)**
-```env
-VITE_API_BASE_URL=http://localhost:5000/api/v1
-```
-
----
-
-## 🛠️ 14. Technologies Used
-
-### **Backend**
-| Tech | Version | Purpose |
-|------|---------|---------|
-| Node.js | v14+ | Runtime |
-| Express | 4.21.2 | Framework |
-| MongoDB | - | Database |
-| Mongoose | 9.6.0 | ODM |
-| JWT | 9.0.2 | Authentication |
-| bcrypt | 5.1.1 | Password hashing |
-| Joi | 17.13.3 | Validation |
-| Helmet | 8.0.0 | Security |
-| Morgan | 1.10.0 | Logging |
-| Multer | 2.1.1 | File upload |
-
-### **Frontend**
-| Tech | Version | Purpose |
-|------|---------|---------|
-| React | 18.3.1 | UI framework |
-| Vite | 6.0.3 | Build tool |
-| React Router | 6.28.0 | Routing |
-| Axios | 1.7.9 | HTTP client |
-| Tailwind CSS | 3.4.17 | Styling |
-| React Hot Toast | 2.6.0 | Notifications |
-| Lucide React | 1.14.0 | Icons |
-| Recharts | 3.8.1 | Charts |
-
----
-
-## ⚡ 16. Challenges & Solutions
-
-### **Challenge: Bulk Data Upload**
-**Solution**: Used Multer + csv-parser with error tracking and summary reporting
-
-### **Challenge: Duplicate Attendance**
-**Solution**: Created compound unique index on (student, subject, date)
-
-### **Challenge: Role-Based Access**
-**Solution**: Frontend RoleRoute + Backend restrictTo middleware + Service layer filtering
-
-### **Challenge: Large Dataset Performance**
-**Solution**: Implemented pagination, database indexes, and optimized queries
-
-### **Challenge: Token Management**
-**Solution**: JWT tokens with 24-hour expiry + Axios interceptor for 401 handling
-
----
-
-## 🔮 17. Future Enhancements
-
-- 📱 Mobile App (React Native/Flutter)
-- 📧 Real-time Email Notifications
-- 📊 Advanced Analytics Dashboard
-- 🎥 Video Class Integration
-- 📝 Online Assignment Submission
-- 🧪 Online Exam Platform
-- 🔒 Two-Factor Authentication
-- 🌍 Multi-Language Support
-- ☁️ Cloud Deployment
-- 🐳 Docker Containerization
-
----
-
-## 👨‍💻 18. Author / Team Info
-
-**Project Name**: Campus ERP  
-**Version**: 1.0.0  
-**Status**: Production Ready  
-
-**Created By**: Sid76  
-**Contact**: your-email@example.com
-
----
-
-## 📜 19. License
-
-This project is licensed under the **MIT License**.
-
----
-
-## 🎯 Quick Commands
-
+Run the development server:
 ```bash
-# Backend
-cd backend && npm run dev          # Development server
-cd backend && npm run build        # Production build
-cd backend && npm run create-admin # Create admin
-
-# Frontend
-cd frontend && npm run dev         # Development server
-cd frontend && npm run build       # Production build
+# Runs nodemon server.js
+npm run dev
 ```
+
+### **2. Configure the Frontend**
+```bash
+# Navigate to the frontend directory
+cd ../frontend
+
+# Install dependencies
+npm install
+
+# Create your local environment file
+echo "VITE_API_BASE_URL=http://localhost:5000/api/v1" > .env.local
+```
+Run the development server:
+```bash
+# Launches Vite
+npm run dev
+```
+Open your browser and navigate to `http://localhost:5173`.
+
+### **3. Seeding Initial Admin User**
+To log in for the first time, seed an administrator account using the CLI script:
+```bash
+cd ../backend
+npm run create-admin
+```
+This utility reads `ADMIN_EMAIL` and `ADMIN_PASSWORD` from your [backend/.env](file:///c:/3rdyear/anti_gravity/vignan/backend/.env) file to configure the root administrator.
 
 ---
 
-**Thank you for using Campus ERP! 🎓**
+## 🚀 8. Production Deployment
+
+### **Backend (Render)**
+1. Create a **Web Service** on Render.
+2. Set the **Root Directory** to `backend`.
+3. Set the **Build Command** to `npm install`.
+4. Set the **Start Command** to `node server.js`.
+5. In **Environment Variables**, define your custom variables (e.g. `MONGO_URI`, `JWT_SECRET`, `NODE_ENV=production`).
+
+### **Frontend (Vercel)**
+1. Import the repository into Vercel.
+2. Select `Vite` as the framework preset.
+3. Set the **Root Directory** to `frontend`.
+4. Define the **Environment Variable** `VITE_API_BASE_URL` pointing to your Render backend API endpoint (e.g. `https://api.vignanerp.com/api/v1`).
+5. Click **Deploy**.
