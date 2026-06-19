@@ -216,7 +216,42 @@ This utility reads `ADMIN_EMAIL` and `ADMIN_PASSWORD` from your [backend/.env](f
 
 ---
 
-## 🚀 8. Production Deployment
+## 🛠️ 8. Tech Stack & Developer Tools
+
+The following tools and libraries form the foundation of this Campus ERP:
+
+### **Frontend Technologies**
+* **React 18.3**: Declarative UI components and custom Context Hooks (`AuthContext.jsx`).
+* **Vite 6.0**: Fast build tool and hot-reloading development server.
+* **Tailwind CSS v3.4**: Utility-first CSS styling framework.
+* **Framer Motion v12.3**: Used for smooth route transitions and micro-animations.
+* **Recharts v3.8**: Responsive, clean charts for rendering grade/performance trends.
+* **Axios v1.7**: HTTP client handles API request authorizations and token expiry redirects.
+* **Lucide React v1.14**: Vector icon catalog for clean, responsive designs.
+* **React Hot Toast v2.6**: Instant notification alerts and upload progress prompts.
+
+### **Backend Technologies**
+* **Node.js**: Asynchronous JavaScript runtime environment.
+* **Express.js v4.21**: Fast, minimal web application framework.
+* **Mongoose ODM v9.6**: Data modeling and query builder for MongoDB.
+* **JSON Web Tokens (JWT) v9.0**: Stateless, encrypted user authorization payloads.
+* **Bcrypt v5.1**: Secure salted password hashing (10 iterations).
+* **Joi v17.13**: Object schema validation middleware for API requests.
+* **Helmet v8.0**: Secure HTTP response headers configuration.
+* **Multer v2.1**: Multi-part parser handling file uploads (CSV streams).
+* **CSV Parser v3.2**: Stream processor to read spreadsheet lines efficiently.
+* **Morgan v1.10**: HTTP logging output in the console.
+
+### **Development & Deployment Tools**
+* **Git**: System version tracking and source code management.
+* **Render**: Live cloud hosting platform for the Node.js Express server.
+* **Vercel**: Static hosting platform optimized for Vite + React client deployments.
+* **Nodemon**: Auto-restarting development loop.
+* **MongoDB Atlas**: Managed multi-region cloud database cluster.
+
+---
+
+## 🚀 9. Production Deployment
 
 ### **Backend (Render)**
 1. Create a **Web Service** on Render.
@@ -231,3 +266,4 @@ This utility reads `ADMIN_EMAIL` and `ADMIN_PASSWORD` from your [backend/.env](f
 3. Set the **Root Directory** to `frontend`.
 4. Define the **Environment Variable** `VITE_API_BASE_URL` pointing to your Render backend API endpoint (e.g. `https://api.vignanerp.com/api/v1`).
 5. Click **Deploy**.
+
