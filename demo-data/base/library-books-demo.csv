@@ -1,0 +1,26 @@
+bookId,title,author,department,availableCopies,totalCopies
+LIB-CSE-001,CSE Advanced Study Vol 1,Author CSE 1,CSE,10,15
+LIB-CSE-002,CSE Advanced Study Vol 2,Author CSE 2,CSE,10,15
+LIB-CSE-003,CSE Advanced Study Vol 3,Author CSE 3,CSE,10,15
+LIB-CSE-004,CSE Advanced Study Vol 4,Author CSE 4,CSE,10,15
+LIB-CSE-005,CSE Advanced Study Vol 5,Author CSE 5,CSE,10,15
+LIB-IT-001,IT Advanced Study Vol 1,Author IT 1,IT,10,15
+LIB-IT-002,IT Advanced Study Vol 2,Author IT 2,IT,10,15
+LIB-IT-003,IT Advanced Study Vol 3,Author IT 3,IT,10,15
+LIB-IT-004,IT Advanced Study Vol 4,Author IT 4,IT,10,15
+LIB-IT-005,IT Advanced Study Vol 5,Author IT 5,IT,10,15
+LIB-ECE-001,ECE Advanced Study Vol 1,Author ECE 1,ECE,10,15
+LIB-ECE-002,ECE Advanced Study Vol 2,Author ECE 2,ECE,10,15
+LIB-ECE-003,ECE Advanced Study Vol 3,Author ECE 3,ECE,10,15
+LIB-ECE-004,ECE Advanced Study Vol 4,Author ECE 4,ECE,10,15
+LIB-ECE-005,ECE Advanced Study Vol 5,Author ECE 5,ECE,10,15
+LIB-EEE-001,EEE Advanced Study Vol 1,Author EEE 1,EEE,10,15
+LIB-EEE-002,EEE Advanced Study Vol 2,Author EEE 2,EEE,10,15
+LIB-EEE-003,EEE Advanced Study Vol 3,Author EEE 3,EEE,10,15
+LIB-EEE-004,EEE Advanced Study Vol 4,Author EEE 4,EEE,10,15
+LIB-EEE-005,EEE Advanced Study Vol 5,Author EEE 5,EEE,10,15
+LIB-CIVIL-001,CIVIL Advanced Study Vol 1,Author CIVIL 1,CIVIL,10,15
+LIB-CIVIL-002,CIVIL Advanced Study Vol 2,Author CIVIL 2,CIVIL,10,15
+LIB-CIVIL-003,CIVIL Advanced Study Vol 3,Author CIVIL 3,CIVIL,10,15
+LIB-CIVIL-004,CIVIL Advanced Study Vol 4,Author CIVIL 4,CIVIL,10,15
+LIB-CIVIL-005,CIVIL Advanced Study Vol 5,Author CIVIL 5,CIVIL,10,15

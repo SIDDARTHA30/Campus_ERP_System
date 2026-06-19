@@ -1,0 +1,16 @@
+admissionNo,name,email,department,year,section,batch,gender,dateOfBirth,address,phone
+23891A3301,Amit Joshi,student_23891a3301@vignanerp.test,AI&DS,2,A,2023-2027,female,2005-12-12,"Flat 102, Road No 3, Hyderabad",918844397530
+23891A3302,Rahul Sharma,student_23891a3302@vignanerp.test,AI&DS,1,B,2023-2027,male,2005-08-14,"Flat 360, Road No 6, Hyderabad",919212811108
+23891A3303,Ananya Singh,student_23891a3303@vignanerp.test,AI&DS,1,A,2023-2027,female,2005-04-21,"Flat 170, Road No 6, Hyderabad",918251079264
+23891A3304,Kavya Verma,student_23891a3304@vignanerp.test,AI&DS,1,A,2023-2027,female,2005-09-05,"Flat 488, Road No 2, Hyderabad",917585578612
+23891A3305,Priya Sharma,student_23891a3305@vignanerp.test,AI&DS,1,B,2023-2027,female,2005-06-17,"Flat 322, Road No 9, Hyderabad",917073964586
+23891A3306,Vihaan Patel,student_23891a3306@vignanerp.test,AI&DS,2,A,2023-2027,male,2005-09-16,"Flat 473, Road No 5, Hyderabad",918731386669
+23891A3307,Vikram Nair,student_23891a3307@vignanerp.test,AI&DS,2,A,2023-2027,male,2005-09-21,"Flat 488, Road No 10, Hyderabad",918596031717
+23891A3308,Diya Joshi,student_23891a3308@vignanerp.test,AI&DS,3,A,2023-2027,male,2005-05-07,"Flat 154, Road No 6, Hyderabad",919071652212
+23891A3309,Diya Iyer,student_23891a3309@vignanerp.test,AI&DS,2,A,2023-2027,male,2005-02-10,"Flat 298, Road No 8, Hyderabad",919436740155
+23891A3310,Aarav Patel,student_23891a3310@vignanerp.test,AI&DS,1,A,2023-2027,female,2005-12-08,"Flat 250, Road No 2, Hyderabad",917319615436
+23891A3311,Rahul Verma,student_23891a3311@vignanerp.test,AI&DS,2,B,2023-2027,male,2005-02-16,"Flat 193, Road No 7, Hyderabad",918769404181
+23891A3312,Kavya Rao,student_23891a3312@vignanerp.test,AI&DS,2,B,2023-2027,male,2005-01-12,"Flat 110, Road No 5, Hyderabad",917607677808
+23891A3313,Amit Sharma,student_23891a3313@vignanerp.test,AI&DS,1,A,2023-2027,female,2005-04-27,"Flat 369, Road No 2, Hyderabad",919966400422
+23891A3314,Kavya Iyer,student_23891a3314@vignanerp.test,AI&DS,3,B,2023-2027,male,2005-05-23,"Flat 377, Road No 9, Hyderabad",918271958904
+23891A3315,Ananya Patel,student_23891a3315@vignanerp.test,AI&DS,1,A,2023-2027,female,2005-11-28,"Flat 494, Road No 2, Hyderabad",917551825488

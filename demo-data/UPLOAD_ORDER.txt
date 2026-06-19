@@ -1,0 +1,16 @@
+UPLOAD SEQUENCE FOR CAMPUS ERP:
+-------------------------------
+1. faculty-demo.csv       (Creates faculty records and accounts)
+2. students-demo.csv      (Creates student records and accounts)
+3. subjects-demo.csv      (Links to existing faculty)
+4. attendance-demo.csv    (Links to students and subjects)
+5. marks-demo.csv         (Links to students and subjects)
+6. materials-demo.csv     (Links to faculty and subjects)
+7. notices-demo.csv       (General institutional updates)
+8. library-books-demo.csv (Inventory management)
+9. fees-demo.csv          (Student financial records)
+
+IMPORTANT:
+- Ensure the Faculty and Students are uploaded FIRST as other data depends on their IDs.
+- Login for Students: ROLLNUMBER@student
+- Login for Faculty: FACULTYID@faculty
