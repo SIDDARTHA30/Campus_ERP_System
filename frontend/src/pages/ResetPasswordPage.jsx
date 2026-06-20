@@ -29,14 +29,14 @@ function ResetPasswordPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-slate-50 px-4">
+    <div className="flex min-h-screen items-center justify-center bg-slate-50 dark:bg-slate-950 px-4">
       <div className="card w-full max-w-md p-8">
-        <h2 className="text-2xl font-bold text-slate-900">Set New Password</h2>
-        <p className="mt-2 text-slate-500">Choose a strong password for your account.</p>
+        <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Set New Password</h2>
+        <p className="mt-2 text-slate-500 dark:text-slate-400">Choose a strong password for your account.</p>
 
         <form onSubmit={handleSubmit} className="mt-6 space-y-4">
           <div>
-            <label className="block text-sm font-semibold text-slate-700">New Password</label>
+            <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300">New Password</label>
             <input
               type="password"
               className="input mt-1 w-full"
@@ -46,7 +46,7 @@ function ResetPasswordPage() {
             />
           </div>
           <div>
-            <label className="block text-sm font-semibold text-slate-700">Confirm Password</label>
+            <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300">Confirm Password</label>
             <input
               type="password"
               className="input mt-1 w-full"
@@ -62,7 +62,7 @@ function ResetPasswordPage() {
         </form>
 
         <div className="mt-6 text-center">
-          <Link to="/login" className="text-sm font-medium text-slate-600 hover:text-slate-900">
+          <Link to="/login" className="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">
             Back to Login
           </Link>
         </div>

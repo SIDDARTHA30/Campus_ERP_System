@@ -39,12 +39,12 @@ function ChangePasswordPage() {
   return (
     <div className="flex min-h-[60vh] items-center justify-center">
       <div className="card w-full max-w-md p-8">
-        <h2 className="text-2xl font-bold text-slate-900">Change Password</h2>
-        <p className="mt-2 text-slate-500">You must change your password to continue.</p>
+        <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Change Password</h2>
+        <p className="mt-2 text-slate-500 dark:text-slate-400">You must change your password to continue.</p>
 
         <form onSubmit={handleSubmit} className="mt-6 space-y-4">
           <div>
-            <label className="block text-sm font-semibold text-slate-700">Current Password</label>
+            <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300">Current Password</label>
             <input
               type="password"
               className="input mt-1 w-full"
@@ -54,7 +54,7 @@ function ChangePasswordPage() {
             />
           </div>
           <div>
-            <label className="block text-sm font-semibold text-slate-700">New Password</label>
+            <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300">New Password</label>
             <input
               type="password"
               className="input mt-1 w-full"
@@ -64,7 +64,7 @@ function ChangePasswordPage() {
             />
           </div>
           <div>
-            <label className="block text-sm font-semibold text-slate-700">Confirm New Password</label>
+            <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300">Confirm New Password</label>
             <input
               type="password"
               className="input mt-1 w-full"

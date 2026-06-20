@@ -16,7 +16,7 @@ function SummaryCard({ label, value, icon: Icon, color = "text-blue-600", helper
     </div>
   );
 
-  const baseClasses = "bg-white/80 dark:bg-slate-900/60 backdrop-blur-lg rounded-2xl shadow-md p-6 flex items-center transition-all duration-300 group hover:shadow-xl hover:-translate-y-1 border border-white/40 dark:border-slate-800 cursor-pointer";
+  const baseClasses = "bg-white/80 dark:bg-slate-900/60 backdrop-blur-lg rounded-2xl shadow-md p-6 flex items-center transition-all duration-300 group hover:shadow-xl hover:-translate-y-1 border border-slate-200/60 dark:border-slate-800 cursor-pointer";
 
   if (!onClick) {
     return <div className={baseClasses}>{CardContent}</div>;

@@ -79,8 +79,8 @@ function FacultyMarks() {
       <section className="card p-6">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
-            <h2 className="text-2xl font-semibold text-slate-900">Upload Marks</h2>
-            <p className="mt-1 text-sm text-slate-500">Enter marks for students and submit in bulk.</p>
+            <h2 className="text-2xl font-semibold text-slate-900 dark:text-white">Upload Marks</h2>
+            <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Enter marks for students and submit in bulk.</p>
           </div>
 
           <div className="flex gap-3 items-center">
@@ -101,8 +101,8 @@ function FacultyMarks() {
           {loading ? <LoadingState label="Loading students..." /> : null}
           {!loading && !filteredStudents.length ? <EmptyState title="No students to grade" description="Select a subject to start entering marks." /> : null}
           {!loading && filteredStudents.length ? (
-          <table className="min-w-full divide-y divide-slate-200 text-left text-sm">
-            <thead className="sticky top-0 bg-white z-10 shadow-sm text-slate-600">
+          <table className="min-w-full divide-y divide-slate-200 dark:divide-slate-800 text-left text-sm">
+            <thead className="sticky top-0 bg-white dark:bg-slate-900 z-10 shadow-sm text-slate-600 dark:text-slate-300">
               <tr>
                 <th className="px-5 py-4 font-medium">Admission No</th>
                 <th className="px-5 py-4 font-medium">Name</th>
@@ -110,14 +110,14 @@ function FacultyMarks() {
                 <th className="px-5 py-4 font-medium">Marks</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-200 bg-white">
+            <tbody className="divide-y divide-slate-200 dark:divide-slate-800 bg-white dark:bg-slate-900/20">
               {filteredStudents.map((st) => {
                 const studentId = st._id || st.id;
                 return (
-                  <tr key={studentId} className="hover:bg-slate-50">
-                    <td className="px-5 py-4 text-slate-700">{st.admissionNo}</td>
-                    <td className="px-5 py-4 font-medium text-slate-900">{st.name}</td>
-                    <td className="px-5 py-4 text-slate-700">{st.department}</td>
+                  <tr key={studentId} className="hover:bg-slate-50 dark:hover:bg-slate-800/40">
+                    <td className="px-5 py-4 text-slate-700 dark:text-slate-300">{st.admissionNo}</td>
+                    <td className="px-5 py-4 font-medium text-slate-900 dark:text-white">{st.name}</td>
+                    <td className="px-5 py-4 text-slate-700 dark:text-slate-300">{st.department}</td>
                     <td className="px-5 py-4">
                       <input className="input w-28" type="number" min="0" max="100" value={marksMap[studentId] ?? ''} onChange={(e) => updateMark(studentId, e.target.value)} />
                     </td>

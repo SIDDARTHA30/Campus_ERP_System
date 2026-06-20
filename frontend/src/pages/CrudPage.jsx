@@ -272,7 +272,7 @@ function CrudPage({
   return (
     <div className="space-y-8 pb-12 fade-in-up">
       {/* Action Bar */}
-      <section className="card p-6 border-l-8 border-brand-600">
+      <section className="bg-white dark:bg-slate-800/50 border border-slate-200/60 dark:border-slate-700/50 shadow-xl shadow-slate-200/40 dark:shadow-2xl dark:shadow-black/20 rounded-3xl p-6 border-l-8 border-brand-600">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
           <div>
             <h2 className="text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">{title || 'Records'}</h2>
@@ -325,7 +325,7 @@ function CrudPage({
         </div>
 
         {/* Filters Row */}
-        <div className="mt-8 grid gap-4 md:flex md:items-center pt-8 border-t border-slate-100 dark:border-slate-800">
+        <div className="mt-8 grid gap-4 md:flex md:items-center pt-8 border-t border-slate-200/60 dark:border-slate-800">
           <div className="relative flex-1">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400 dark:text-slate-600" />
             <input 

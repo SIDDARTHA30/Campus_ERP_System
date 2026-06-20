@@ -43,8 +43,8 @@ export default function MyClasses() {
       <section className="card p-6">
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-2xl font-semibold text-slate-900">My Classes</h2>
-            <p className="mt-1 text-sm text-slate-500">Subjects assigned to you and their students.</p>
+            <h2 className="text-2xl font-semibold text-slate-900 dark:text-white">My Classes</h2>
+            <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Subjects assigned to you and their students.</p>
           </div>
         </div>
 
@@ -53,11 +53,11 @@ export default function MyClasses() {
             const subId = sub._id || sub.id;
             const isSelected = (selectedSubject?._id || selectedSubject?.id) === subId;
             return (
-              <div key={subId} className={`p-4 rounded-xl border ${isSelected ? 'border-brand-600 bg-brand-50' : 'border-slate-200 bg-white'}`}>
+              <div key={subId} className={`p-4 rounded-xl border ${isSelected ? 'border-brand-600 dark:border-brand-500 bg-brand-50 dark:bg-blue-950/20' : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/40'}`}>
                 <div className="flex items-center justify-between">
                   <div>
-                    <div className="text-sm font-medium text-slate-900">{sub.title}</div>
-                    <div className="text-xs text-slate-500">{sub.code} • {sub.department}</div>
+                    <div className="text-sm font-medium text-slate-900 dark:text-white">{sub.title}</div>
+                    <div className="text-xs text-slate-500 dark:text-slate-400">{sub.code} • {sub.department}</div>
                   </div>
                   <button className="btn-secondary cursor-pointer" onClick={() => setSelectedSubject(sub)}>View</button>
                 </div>
@@ -69,25 +69,25 @@ export default function MyClasses() {
 
       {selectedSubject ? (
         <section className="card p-6">
-          <h3 className="text-lg font-semibold text-slate-900">Students for {selectedSubject.title}</h3>
+          <h3 className="text-lg font-semibold text-slate-900 dark:text-white">Students for {selectedSubject.title}</h3>
           <div className="mt-4 overflow-x-auto">
-            <table className="min-w-full divide-y divide-slate-200 text-left text-sm">
-              <thead className="sticky top-0 bg-white z-10 shadow-sm text-slate-600">
+            <table className="min-w-full divide-y divide-slate-200 dark:divide-slate-800 text-left text-sm">
+              <thead className="sticky top-0 bg-white dark:bg-slate-900 z-10 shadow-sm text-slate-600 dark:text-slate-300">
                 <tr>
                   <th className="px-5 py-4 font-medium">Admission No</th>
                   <th className="px-5 py-4 font-medium">Name</th>
                   <th className="px-5 py-4 font-medium">Department</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-200 bg-white">
+              <tbody className="divide-y divide-slate-200 dark:divide-slate-800 bg-white dark:bg-slate-900/20">
                 {classStudents.length ? classStudents.map((st) => (
-                  <tr key={st._id || st.id} className="hover:bg-slate-50">
-                    <td className="px-5 py-4 text-slate-700">{st.admissionNo}</td>
-                    <td className="px-5 py-4 font-medium text-slate-900">{st.name}</td>
-                    <td className="px-5 py-4 text-slate-700">{st.department}</td>
+                  <tr key={st._id || st.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/40">
+                    <td className="px-5 py-4 text-slate-700 dark:text-slate-300">{st.admissionNo}</td>
+                    <td className="px-5 py-4 font-medium text-slate-900 dark:text-white">{st.name}</td>
+                    <td className="px-5 py-4 text-slate-700 dark:text-slate-300">{st.department}</td>
                   </tr>
                 )) : (
-                  <tr><td className="px-5 py-6 text-slate-500" colSpan={3}>No students found for this subject.</td></tr>
+                  <tr><td className="px-5 py-6 text-slate-500 dark:text-slate-400" colSpan={3}>No students found for this subject.</td></tr>
                 )}
               </tbody>
             </table>
